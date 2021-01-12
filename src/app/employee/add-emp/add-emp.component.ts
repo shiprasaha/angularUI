@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SharedService } from 'src/app/shared.service';
 
 @Component({
@@ -7,11 +7,8 @@ import { SharedService } from 'src/app/shared.service';
   styleUrls: ['./add-emp.component.css']
 })
 export class AddEmpComponent implements OnInit {
-  _id: number;
-  static latestId: any;
 
-  constructor(private service: SharedService) {
-    this._id = AddEmpComponent.incrementId()
+  constructor(private readonly service: SharedService) {
   }
 
   @Input() emp: any;
@@ -29,29 +26,19 @@ export class AddEmpComponent implements OnInit {
   loadDepartmentList() {
     this.service.getAllDepartmentNames().subscribe((data: any) => {
       this.DepartmentsList = data;
-
-      // this.EmployeeId = this.emp.EmployeeId;
-      // this.EmployeeName = this.emp.EmployeeName;
-      // this.Department = this.emp.Department;
-      // this.DateOfJoining = this.emp.DateOfJoining;
     });
   }
 
   addEmployee() {
-    var val = {
+    let val = {
       EmployeeId: this.EmployeeId,
       EmployeeName: this.EmployeeName,
       Department: this.Department,
-      DateOfJoining: this.DateOfJoining,
+      DateOfJoining: this.DateOfJoining
     };
 
     this.service.addEmployee(val).subscribe(res => {
       alert(res.toString());
     });
-  }
-
-  static incrementId() {
-    !this.latestId? 1 :this.latestId++;
-    return this.latestId;
   }
 }
