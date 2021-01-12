@@ -10,17 +10,8 @@ export class SharedService {
 
   constructor(private http: HttpClient) { }
 
-  getDepList(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl + '/department');
-  }
-
   addDepartment(val: any) {
-    console.log(val);
     return this.http.post(this.APIUrl + '/Department', val);
-  }
-
-  getEmpList(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl + '/Employee');
   }
 
   addEmployee(val: any) {

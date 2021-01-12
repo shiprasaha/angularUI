@@ -6,38 +6,12 @@ import { SharedService } from 'src/app/shared.service';
   templateUrl: './show-dep.component.html',
   styleUrls: ['./show-dep.component.css']
 })
+
+//TODO: Create logic for Show Department List on UI
 export class ShowDepComponent implements OnInit {
 
-  constructor(private service: SharedService) { }
-
-  DepartmentList: any = [];
-  ModalTitle: string;
-  ActivateAddDepComp: boolean = false;
-  dep: any;
+  constructor(private readonly service: SharedService) { }
 
   ngOnInit(): void {
-    this.refreshDepartmentList();
   }
-
-  addClick() {
-    this.dep = {
-      DepartmentID: 0,
-      DepartmentName: ""
-    }
-
-    this.ModalTitle = "Add Department";
-    this.ActivateAddDepComp = true;
-  }
-
-  closeClick() {
-    this.ActivateAddDepComp = false;
-    this.refreshDepartmentList();
-  }
-
-  refreshDepartmentList() {
-    this.service.getDepList().subscribe(data => {
-      this.DepartmentList = data;
-    })
-  }
-
 }
